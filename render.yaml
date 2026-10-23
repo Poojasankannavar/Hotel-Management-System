@@ -1,0 +1,26 @@
+databases:
+  - name: hotel-management-db
+    databaseName: hotel_management
+    user: hotel_management
+    plan: free
+    region: singapore
+
+services:
+  - type: web
+    name: hotel-management-system
+    runtime: python
+    plan: free
+    region: singapore
+    branch: main
+    buildCommand: pip install -r requirements.txt && python food/manage.py collectstatic --no-input && python food/manage.py migrate
+    startCommand: gunicorn --chdir food food.wsgi:application
+    healthCheckPath: /
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: hotel-management-db
+          property: connectionString
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"

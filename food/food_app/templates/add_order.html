@@ -260,7 +260,9 @@
             })
             .then(data => {
                 if (data.success) {
-                    alert('Bill details saved successfully!');
+                    if (!data.redirect_url) {
+                        throw new Error('The order was saved, but no print-page redirect was provided.');
+                    }
                     window.location.assign(data.redirect_url);
                 } else {
                     throw new Error(data.error || 'The order could not be saved.');

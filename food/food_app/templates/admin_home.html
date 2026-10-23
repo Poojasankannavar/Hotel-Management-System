@@ -33,7 +33,9 @@
     <a href="{% url 'checkTables' %}" class="btn btn-success" id="checkTable">Check Table</a>
   </div>
   <div class="row mt-4">
-    {% for table in tdata %}<div class="col-md-2"><div class="card mb-4 table-card {% if table.Table_name == saved_table_name %}selected{% elif table.Table_name in stored_tables %}stored{% endif %}" onclick="selectTable('{{ table.Table_name }}')"><div class="card-body"><h5 class="card-title"><strong>{{ table.Table_name }}</strong></h5><p class="card-text">{{ table.Category }}</p></div></div></div>{% endfor %}
+    {% for table in tdata %}<div class="col-md-2"><div class="card mb-4 table-card {% if table.Table_name == saved_table_name %}selected{% elif table.Table_name in stored_tables %}stored{% endif %}" onclick="selectTable('{{ table.Table_name }}')"><div class="card-body"><h5 class="card-title"><strong>{{ table.Table_name }}</strong></h5><p class="card-text">{{ table.Category }}</p></div></div></div>{% empty %}
+    <div class="col-12"><div class="alert alert-warning text-center" role="status"><strong>No dining tables are configured yet.</strong><br>Add a table to enable table ordering and billing.<br><a class="btn btn-primary mt-3" href="{% url 'add_table' %}">Add the first table</a></div></div>
+    {% endfor %}
   </div>
 </div></div></div>
 <script>

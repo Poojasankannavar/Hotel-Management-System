@@ -48,6 +48,14 @@ class PublicFlowTests(TestCase):
         response = self.client.get(reverse('print_pracel', args=[1]))
         self.assertEqual(response.status_code, 200)
 
+    def test_admin_and_user_dashboards_explain_missing_table_setup(self):
+        admin_response = self.client.get(reverse('admin_home'))
+        user_response = self.client.get(reverse('userHome'))
+
+        self.assertContains(admin_response, 'No dining tables are configured yet.')
+        self.assertContains(admin_response, reverse('add_table'))
+        self.assertContains(user_response, 'No dining tables are available yet.')
+
     def test_open_table_deletion_endpoint(self):
         ItemOrder.objects.create(
             table_name='T1', bill_no='B1', bill_date='2026-01-01', qty=1,

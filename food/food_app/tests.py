@@ -29,7 +29,7 @@ class PublicFlowTests(TestCase):
         response = self.client.post(reverse('admin_login'), {
             'adminname': 'Test Admin', 'password': 'secret',
         })
-        self.assertEqual(response.status_code, 200)
+        self.assertRedirects(response, reverse('admin_home'))
         self.assertEqual(self.client.session['adminname'], 'Test Admin')
 
     def test_user_registration_and_login(self):

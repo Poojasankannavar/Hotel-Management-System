@@ -3027,10 +3027,14 @@ def admin_login(request):
     admin=admin_register.objects.filter(admin_name=admin_name,password=password).first()
 
     if admin:
-        request.session['adminname']=admin.admin_name
-        return render(request,'admin_home.html')
+        request.session['adminname'] = admin.admin_name
+        # Let the dashboard view build its table/order context just as it does
+        # when the page is opened directly.
+        return redirect('admin_home')
     else:
-        return HttpResponse('invalid username or password')
+        return render(request, 'adminlogin.html', {
+            'msg': 'Invalid username or password. Please try again.'
+        })
 
 def admins(request):
     products=admin_register.objects.all()
@@ -3046,7 +3050,7 @@ def edit_admin(request,id):
     if request.method == "POST":
         admin_name = request.POST.get('adminname')
         mobile_number = request.POST.get('number')
-        admin_id=request.POST.get('number')
+        admin_id=request.POST.get('adminid')
         password = request.POST.get('password')
 
         # Update the Items object
@@ -3097,7 +3101,9 @@ def user_login(request):
         request.session['username']=user.user_name
         return redirect('userHome')
     else:
-        return HttpResponse('invalid username or password')
+        return render(request, 'userlogin.html', {
+            'msg': 'Invalid username or password. Please try again.'
+        })
 
 def users(request):
     products=user_register.objects.all()

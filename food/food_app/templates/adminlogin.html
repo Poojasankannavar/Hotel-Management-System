@@ -1,0 +1,617 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Heavenly Hotel Administrator Login">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Heavenly Hotel</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --coffee-dark: #2b1b12;
+            --coffee-medium: #56351f;
+            --coffee-light: #c89560;
+            --cream: #fff8ef;
+            --text-dark: #38261b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            background:
+                linear-gradient(120deg, rgba(31, 20, 14, 0.76), rgba(65, 41, 25, 0.52)),
+                url("{% static 'img/table1.jpg' %}") center/cover no-repeat fixed;
+        }
+
+        /* Navigation */
+        .header-section {
+            position: relative;
+            z-index: 1050;
+            background: rgba(43, 27, 18, 0.98);
+            border-bottom: 1px solid rgba(200, 149, 96, 0.35);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        .main-navbar {
+            min-height: 82px;
+            padding: 12px 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-logo {
+            width: 55px;
+            height: 50px;
+            object-fit: cover;
+            border: 2px solid var(--coffee-light);
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-name {
+            color: var(--cream);
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .brand-tagline {
+            margin-top: 3px;
+            color: #d9b58d;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            padding: 12px 10px;
+            color: #f7eee6;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            transition: color 0.25s ease;
+        }
+
+        .navbar-dark .navbar-nav .nav-link:hover,
+        .navbar-dark .navbar-nav .nav-link:focus {
+            color: #e5b77e;
+        }
+
+        .navbar-toggler {
+            border: 1px solid rgba(229, 183, 126, 0.6);
+            border-radius: 8px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(200, 149, 96, 0.2);
+        }
+
+        .dropdown-menu {
+            min-width: 185px;
+            padding: 8px;
+            border: 1px solid #eee1d2;
+            border-radius: 12px;
+            background: #fffdf9;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+        }
+
+        .dropdown-item {
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .dropdown-item:hover {
+            background: #f5e8d8;
+            color: #704522;
+        }
+
+        /* Login Page */
+        .page-wrapper {
+            min-height: calc(100vh - 82px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .login-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            max-width: 1000px;
+            min-height: 540px;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 25px 75px rgba(0, 0, 0, 0.35);
+            animation: fadeIn 0.7s ease;
+        }
+
+        /* Welcome Panel */
+        .welcome-panel {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 45px;
+            background:
+                linear-gradient(to top, rgba(31, 19, 12, 0.96), rgba(31, 19, 12, 0.10)),
+                url("{% static 'img/table1.jpg' %}") center/cover no-repeat;
+            color: #fff;
+        }
+
+        .brand-label {
+            display: inline-block;
+            align-self: flex-start;
+            margin-bottom: 22px;
+            padding: 9px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            color: #f1c78c;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+        }
+
+        .gold-line {
+            width: 60px;
+            height: 4px;
+            margin-bottom: 24px;
+            border-radius: 5px;
+            background: #d5a16a;
+        }
+
+        .welcome-panel h1 {
+            margin-bottom: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 46px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .welcome-panel h1 span {
+            color: #e7b66f;
+        }
+
+        .welcome-panel p {
+            max-width: 350px;
+            margin-bottom: 0;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 24px;
+        }
+
+        .feature-item {
+            padding: 8px 11px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff5e8;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Form Panel */
+        .form-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px 55px;
+            color: var(--text-dark);
+        }
+
+        .login-icon {
+            width: 62px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            border-radius: 18px;
+            background: #f7eee3;
+            color: var(--coffee-medium);
+            font-size: 28px;
+        }
+
+        .form-panel h2 {
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 33px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .subtitle {
+            margin-bottom: 28px;
+            color: #8b8179;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .message-box {
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            border: 1px solid #f1d3ce;
+            border-radius: 10px;
+            background: #fff2f0;
+            color: #b42318;
+            font-size: 13px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .form-label {
+            margin-bottom: 9px;
+            color: #49372b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 22px;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            z-index: 2;
+            transform: translateY(-50%);
+            color: #9b806b;
+            font-size: 17px;
+        }
+
+        .form-control {
+            height: 52px;
+            padding: 12px 15px 12px 45px;
+            border: 1px solid #e8dfd7;
+            border-radius: 12px;
+            background: #fcfaf8;
+            color: var(--text-dark);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .form-control::placeholder {
+            color: #b5aaa1;
+        }
+
+        .form-control:focus {
+            border-color: #a8754c;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(168, 117, 76, 0.12);
+        }
+
+        .btn-login {
+            width: 100%;
+            height: 52px;
+            margin-top: 4px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #80512f, #56351f);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 8px 18px rgba(86, 53, 31, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #96643d, #684126);
+            color: #fff;
+            box-shadow: 0 12px 25px rgba(86, 53, 31, 0.28);
+        }
+
+        .register-text {
+            margin-top: 24px;
+            color: #8b8179;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .register-link {
+            color: #86542f;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .register-link:hover {
+            color: #bd854d;
+            text-decoration: underline;
+        }
+
+        .security-note {
+            margin-top: 8px;
+            color: #8b8179;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .form-footer {
+            margin-top: 26px;
+            padding-top: 18px;
+            border-top: 1px solid #eee7e0;
+            color: #a39990;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                max-height: calc(100vh - 90px);
+                overflow-y: auto;
+                margin-top: 12px;
+                padding: 10px;
+                border-top: 1px solid rgba(200, 149, 96, 0.25);
+            }
+
+            .navbar-dark .navbar-nav .nav-link {
+                padding: 12px;
+                border-radius: 8px;
+            }
+
+            .navbar-dark .navbar-nav .nav-link:hover {
+                background: rgba(200, 149, 96, 0.12);
+            }
+
+            .dropdown-menu {
+                border: none;
+                background: #3a281c;
+                box-shadow: none;
+            }
+
+            .dropdown-item {
+                color: #f6eee6;
+            }
+
+            .dropdown-item:hover {
+                background: rgba(200, 149, 96, 0.18);
+                color: #e5b77e;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-wrapper {
+                padding: 28px 16px;
+            }
+
+            .login-card {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                min-height: auto;
+                border-radius: 20px;
+            }
+
+            .welcome-panel {
+                min-height: 245px;
+                padding: 30px;
+            }
+
+            .welcome-panel h1 {
+                font-size: 33px;
+            }
+
+            .welcome-panel p {
+                font-size: 13px;
+            }
+
+            .feature-list {
+                margin-top: 17px;
+            }
+
+            .form-panel {
+                padding: 35px 28px;
+            }
+
+            .form-panel h2 {
+                font-size: 29px;
+            }
+
+            .login-icon {
+                width: 54px;
+                height: 54px;
+                margin-bottom: 18px;
+                font-size: 25px;
+            }
+
+            .subtitle {
+                margin-bottom: 23px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .brand-logo {
+                width: 45px;
+                height: 43px;
+            }
+
+            .brand-name {
+                font-size: 19px;
+            }
+
+            .welcome-panel {
+                padding: 23px;
+            }
+
+            .welcome-panel h1 {
+                font-size: 29px;
+            }
+
+            .form-panel {
+                padding: 28px 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    {% include 'navuser.html' %}
+
+    <!-- Admin Login Page -->
+    <main class="page-wrapper">
+        <div class="login-card">
+
+            <!-- Welcome Panel -->
+            <section class="welcome-panel">
+                <span class="brand-label">Administrator Portal</span>
+
+                <div class="gold-line"></div>
+
+                <h1>Welcome Back.<br><span>Take Control.</span></h1>
+
+                <p>
+                    Manage your café operations with ease. Access food menus,
+                    table orders, room bookings, and other management features
+                    from your administration account.
+                </p>
+
+                <div class="feature-list">
+                    <span class="feature-item">☕ Café Management</span>
+                    <span class="feature-item">▦ Table Orders</span>
+                    <span class="feature-item">⌂ Room Booking</span>
+                </div>
+            </section>
+
+            <!-- Login Form -->
+            <section class="form-panel">
+
+                <div class="login-icon" aria-hidden="true">♙</div>
+
+                <h2>Admin Login</h2>
+
+                <p class="subtitle">
+                    Enter your administrator credentials to continue to your dashboard.
+                </p>
+
+                {% if msg %}
+                    <div class="message-box" role="alert">
+                        {{ msg }}
+                    </div>
+                {% endif %}
+
+                <form action="{% url 'admin_login' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="adminname" class="form-label">Admin Username</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">👤</span>
+                            <input
+                                type="text"
+                                name="adminname"
+                                id="adminname"
+                                class="form-control"
+                                placeholder="Enter admin username"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-login">
+                            Login to Dashboard &rarr;
+                        </button>
+                    </div>
+
+                    <p class="register-text">
+                        Not registered yet?
+                        <a href="{% url 'adminregister' %}" class="register-link">
+                            Register here
+                        </a>
+                    </p>
+
+                    <div class="security-note">
+                        🔐 Authorized administrators only
+                    </div>
+                </form>
+
+                <div class="form-footer">
+                    &copy; {% now "Y" %} Heavenly Hotel. All rights reserved.
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+</body>
+</html>

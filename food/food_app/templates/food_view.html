@@ -1,0 +1,522 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Menu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .menu-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0,0,0,0.1);
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .price {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include 'navuser.html' %}
+
+    <!-- Menu Section -->
+    <div class="container">
+        <h2 class="menu-title">Our Food Menu</h2>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
+            <!-- Item 1 -->
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/dosanew.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Masala Dosa</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">101</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹90</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'img/thalinew.jpg' %}" class="card-img-top" alt="Thali">
+                   <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Thali</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">102</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹150</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">15 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'img/vadanew.jpg' %}" class="card-img-top" alt="Vada">
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Vada</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">103</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+             <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1friedricee.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Fried Rice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">104</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹100</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1idli.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Idli</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">105</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹35</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1jeerarice.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Jeera Rice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">106</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹100</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1gobi.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Gobi Manchuri</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">107</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹100</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1masala rice.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Masala Rice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">108</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹90</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1paneerrice.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Paneer Rice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">109</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹100</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1tandoori.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Tandoori</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">110</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹20</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1paneer.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Paneer Masala</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">111</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹90</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1khaju.jpeg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Khaju Masala</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">112</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹90</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1puri.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Puri</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">113</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹60</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+           <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1purithali.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Puri Thali</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">114</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹100</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">15 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/thali.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Thali</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">115</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹150</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">15 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/samosa.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Samosa</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">116</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/noodle.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Noodles</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">117</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1pizza.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Pizza</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">118</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹150</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1bisibele.jpeg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>bisibele Bath</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">119</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹60</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">10 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1masarum.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Mashroom Masala</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">120</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹90</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1mirchi.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Mirchi</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">121</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹30</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1mjuice.jpeg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Mango Juice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">122</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1ojuice.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Orange Juice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">123</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1soda.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Soda</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">124</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹30</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1ice1.jpeg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Ice Cream</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">125</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹50</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1ice2.jpeg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Cone Ice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">126</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹30</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <a href="{% url 'userregister' %}">
+                    <img src="{% static 'img/1ice3.jpg' %}" class="card-img-top" alt="Masala Dosa">
+                    </a>
+                     <div class="card-body">
+                        <h5 class="card-title text-dark"><strong>Cup Ice</strong></h5>
+                        <p class="card-text">
+                        <strong class="text-dark">Item Code:</strong>
+                        <span class="badge bg-success">127</span>
+                         </p>
+                        <p><strong class="text-success">Price:</strong> <strong class="text-danger">₹30</strong></p>
+                        <p><strong class="text-info">Preparation Time:</strong><strong class="text-primary">5 minutes</strong></p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

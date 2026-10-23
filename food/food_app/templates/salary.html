@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Salary Entry">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Entry - Hotel Management</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .header-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .main-menu li:hover .drop-menu {
+            display: block;
+        }
+
+        .form-section {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .form-title {
+            font-family: 'Taviraj', serif;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #333;
+            border-bottom: 2px solid #28a745;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .btn-success {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+{% include 'nav.html' %}
+<br/><br/><br/><br/><br/>
+
+<!-- Form Container -->
+<div class="container mt-4">
+    <div class="form-section mx-auto" style="max-width: 750px;">
+        <h2 class="text-center form-title">Salary Entry</h2>
+        <form method="post" action="{% url 'saveSalary' %}">
+            {% csrf_token %}
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="amt" class="form-label">Amount</label>
+                    <input type="number" step="0.01" class="form-control" id="amt" name="amt" required>
+                </div>
+                <div class="col-md-12">
+                    <label for="reason" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="reason" name="reason" placeholder="Optional remarks or salary note">
+                </div>
+                <div class="col-md-12">
+                    <label for="salaryDetails" class="form-label">Staff Name</label>
+                    <input type="text" class="form-control" id="salaryDetails" name="salaryDetails" placeholder="Start typing name..." list="staff_name" oninput="showStaffDatalist()" required>
+                    <datalist id="staff_name"></datalist>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success w-100 mt-3">💾 Save Salary Entry</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- JavaScript for Dynamic Date and Staff Datalist -->
+<script>
+    function setCurrentDate() {
+        const now = new Date();
+        if (now.getHours() < 2) {
+            now.setDate(now.getDate() - 1);
+        }
+        const formattedDate = now.toISOString().split('T')[0];
+        document.getElementById('date').value = formattedDate;
+    }
+
+    function showStaffDatalist() {
+        const input = document.getElementById('salaryDetails');
+        const datalist = document.getElementById('staff_name');
+
+        if (input.value.length >= 2) {
+            fetch(`/get_staff_name?query=${encodeURIComponent(input.value)}`)
+                .then(response => response.json())
+                .then(data => {
+                    datalist.innerHTML = '';
+                    if (Array.isArray(data) && data.length > 0) {
+                        data.forEach(name => {
+                            const option = document.createElement('option');
+                            option.value = name;
+                            datalist.appendChild(option);
+                        });
+                    } else {
+                        const option = document.createElement('option');
+                        option.value = 'No results';
+                        datalist.appendChild(option);
+                    }
+                })
+                .catch(error => console.error('Fetch error:', error));
+        } else {
+            datalist.innerHTML = '';
+        }
+    }
+
+    window.onload = setCurrentDate;
+</script>
+
+<!-- JS Plugins -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+<script src="{% static 'js/jquery.slicknav.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

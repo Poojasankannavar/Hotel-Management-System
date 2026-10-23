@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Purchase Form">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Purchase | Hotel System</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:400,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f9f9f9;
+            padding-top: 100px;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h3 {
+            font-family: 'Taviraj', serif;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .btn-success {
+            width: 100%;
+        }
+
+        label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+
+    <div class="container">
+        <div class="form-container">
+            <h3>Add Purchase</h3>
+
+            {% if msg %}
+                <div class="alert alert-info text-center">{{ msg }}</div>
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="t1" class="form-label">Item Code</label>
+                        <input type="text" id="t1" name="t1" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="t2" class="form-label">Item Name</label>
+                        <input type="text" id="t2" name="t2" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="qty" class="form-label">Quantity</label>
+                        <input type="number" id="qty" name="qty" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="t4" class="form-label">Item Price</label>
+                        <input type="number" step="0.01" id="t4" name="t4" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="selling" class="form-label">Selling Price</label>
+                        <input type="number" step="0.01" id="selling" name="selling" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="t5" class="form-label">Category</label>
+                        <select id="t5" name="t5" class="form-select" required>
+                            <option value="">Select</option>
+                            <option value="food">Food</option>
+                            <option value="alcohol">Alcohol</option>
+                            <option value="soft_drink">Soft Drink</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <button type="submit" class="btn btn-success">Add Item</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="John Doe">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add room</title>
+</head>
+<body style="background-image: url('{% static 'img/room12.jpg' %}'); background-size: cover; background-position: center; opacity: 0.9;">
+{% include 'nav.html' %}
+
+<br>
+<br>
+<br>
+
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 shadow p-4 mb-5 bg-white rounded">
+            <h2 class="text-center mb-4 text-primary">Add Room</h2>
+
+            <form action="{% url 'admin_room' %}" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="roomno" class="form-label">Room Number</label>
+                    <input type="text" name="roomno" id="roomno" class="form-control" placeholder="Enter Room Number" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Room Category</label>
+                    <select name="category" id="category" class="form-select" required>
+                        <option value="">--- Category ---</option>
+                        <option>Single Bed Room</option>
+                        <option>Double Bed Room</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="category1" class="form-label">Room Type</label>
+                    <select name="category1" id="category1" class="form-select" required>
+                        <option value="">--- Type ---</option>
+                        <option>AC</option>
+                        <option>Non AC</option>
+                    </select>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success w-50">Save Room</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

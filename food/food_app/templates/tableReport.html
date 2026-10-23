@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Template">
+    <meta name="keywords" content="Hotel, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hotel </title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:300,400,500,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+<style>
+  /* Make sure the navbar stays at the top and is not covered by the image */
+    .header-section {
+        top: 0;
+        left: 0;
+    }
+    .main-menu li:hover .drop-menu {
+        display: block;
+    }
+
+</style>
+
+    <!-- Styles for printing on thermal printers -->
+    <style>
+    /* Normal Screen View Styles */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    h1, h3, h6 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    .btn-print {
+        display: block;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .heading {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    /* Print-specific styles */
+    @media print {
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 80mm;  /* Adjust to fit the thermal printer paper width */
+            height: auto;
+            font-size: 10px; /* Adjust font size for smaller print area */
+            line-height: 1.4;
+        }
+
+        @page {
+            size: 80mm auto;  /* Thermal printer page size */
+            margin: 0;
+        }
+
+        /* Hide non-printable elements */
+        .btn-print, .sales_heading, .btn-submit, .monthsale, .heading, .navbar, ul, .form-control {
+            display: none;
+        }
+
+        /* Adjust table styles for printing */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 5mm;
+            background-color: transparent;  /* Make the table background transparent */
+        }
+
+        th, td {
+            text-align: left;
+            padding: 2mm;
+            font-size: 10px;
+            line-height: 1.4;
+            border: none;  /* Remove borders around table cells */
+        }
+
+        th {
+            font-weight: bold;
+            font-size: 10px;
+        }
+
+        .totals {
+            text-align: right;
+            margin-top: 5mm;
+        }
+
+        .totals p {
+            font-size: 10px;
+            margin-left: 0;
+        }
+
+        .footer {
+            font-size: 9px;
+            text-align: center;
+            margin-top: 5mm;
+        }
+    }
+</style>
+</head>
+<body>
+{% include 'nav.html' %}
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h3>Table Reports</h3>
+<form method="post">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+                <input type="date" name="salesmonth" id="salesmonth" class="form-control monthsale">
+        </div>
+        <div class="col-md-4">
+            <select class="form-control" name="selectedcat" required>
+                <option value="">-- Select --</option>
+                {% for cat in tables %}
+                <option value="{{ cat.Table_name }}">{{ cat.Table_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div><br>
+    <div>
+        <input type="submit" value="submit" class="btn btn-primary btn-submit">
+    </div>
+</form>
+
+{% if orders %}
+    <a href="javascript:window.print()" class="btn btn-danger btn-print">Print</a>
+
+<h3>Total Amount: {{ grand_total_amount }} &nbsp;&nbsp;&nbsp;&nbsp;Total Qty: {{ grand_total_qty }}</h3>
+    <p><strong>Selected Month:</strong> {{ selectedmonth }}</p>
+    {% if selectedcat %}
+<p><strong>Selected Category:</strong> {{ selectedcat }}</p>
+{% endif %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Bill NO</th>
+                <th>Total Quantity</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.bill_no }}</td>
+                <td>{{ order.total_qty }}</td>
+                <td>{{ order.total_amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No  data available for the selected month and Category.</p>
+    {% endif %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<!-- Js Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

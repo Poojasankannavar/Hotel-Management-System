@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Fix for overlapping navbar */
+        body {
+            padding-top: 80px; /* Height of navbar */
+        }
+
+        header.header-section {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .header-section li {
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        .main-menu a {
+            text-decoration: none;
+            padding: 15px 20px;
+            display: inline-block;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .drop-menu {
+            display: none;
+            position: absolute;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        li:hover .drop-menu {
+            display: block;
+        }
+
+        .drop-menu li {
+            display: block;
+        }
+
+        /* Page content example */
+        .table-container {
+            margin: 40px 20px;
+        }
+
+        .table-box {
+            padding: 20px;
+            margin: 10px;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .occupied {
+            background-color: #d9534f;
+        }
+
+        .available {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ccc;
+            color: black;
+        }
+
+        .btn-group-top {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header Section Begin -->
+    <header class="header-section">
+        <div class="container-fluid">
+            <div class="inner-header">
+                <div class="logo">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <nav class="main-menu mobile-menu">
+                                <ul>
+                                    <li><a href="{% url 'userHome' %}">Home</a></li>
+                                    <li><a href="{% url 'parcel' %}">Parcel</a></li>
+                                    <li><a href="#">Purchase</a>
+                                        <ul class="drop-menu">
+                                            <li><a href="{% url 'purchaseUser' %}">Add Purchase</a></li>
+                                            <li><a href="{% url 'purchaseListUser' %}">View Purchase</a></li>
+                                            <li><a class="dropdown-item" href="{% url 'purchaseUpdateUser' %}">Purchase</a></li>
+
+                                        </ul>
+                                    </li>
+                                     <li><a href="{% url 'pending_bills_user' %}">Pending</a></li>
+
+                                    <li><a href="#">Expenses</a>
+                                        <ul class="drop-menu">
+                                            <li><a href="{% url 'userExpenses' %}">Expense Add</a></li>
+                                            <li><a href="{% url 'userViewExpenses' %}">Expenses List</a></li>
+
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Reports</a>
+                                        <ul class="drop-menu">
+                                    <li><a href="{% url 'usersalesReport' %}">Sales report</a></li>
+
+
+                                        </ul>
+                                    </li>
+
+
+
+                                    <li><a href="{% url 'index' %}">LogOut</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+<div class="row">
+            {% for table in tables %}
+            <div class="col-md-2">
+                <div class="table-box {% if table.status == 'occupied' %}occupied{% else %}available{% endif %}">
+                    Table {{ table.number }}<br>{{ table.type }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </header>
+</body>
+</html>
+

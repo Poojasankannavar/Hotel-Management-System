@@ -1,0 +1,434 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Heavenly Hotel User Registration">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Heavenly Hotel</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            background:
+                linear-gradient(120deg, rgba(31, 20, 14, 0.82), rgba(65, 41, 25, 0.48)),
+                url("{% static 'img/userlogin.jpg' %}") center/cover fixed no-repeat;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .register-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 610px;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            overflow: hidden;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            animation: fadeIn 0.7s ease;
+        }
+
+        .register-image {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 45px;
+            background:
+                linear-gradient(to top, rgba(31, 19, 12, 0.95), rgba(31, 19, 12, 0.12)),
+                url("{% static 'img/userlogin.jpg' %}") center/cover no-repeat;
+            color: #fff;
+        }
+
+        .brand-label {
+            display: inline-block;
+            align-self: flex-start;
+            margin-bottom: 22px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            border-radius: 30px;
+            color: #f1c78c;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .decorative-line {
+            width: 60px;
+            height: 4px;
+            margin-bottom: 24px;
+            border-radius: 10px;
+            background: #e5b16e;
+        }
+
+        .register-image h1 {
+            margin-bottom: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 46px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .register-image h1 span {
+            color: #e7b66f;
+        }
+
+        .register-image p {
+            max-width: 350px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .register-form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 45px 55px;
+            color: #38261b;
+        }
+
+        .welcome-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 17px;
+            background: #f7eee3;
+            font-size: 27px;
+        }
+
+        .register-form-section h2 {
+            margin-bottom: 9px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #38261b;
+        }
+
+        .subtitle {
+            margin-bottom: 27px;
+            color: #8b8179;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .form-label {
+            margin-bottom: 8px;
+            color: #49372b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 18px;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            z-index: 2;
+            transform: translateY(-50%);
+            font-size: 16px;
+        }
+
+        .form-control {
+            height: 49px;
+            padding: 12px 15px 12px 44px;
+            border: 1px solid #e8dfd7;
+            border-radius: 11px;
+            background: #fcfaf8;
+            color: #38261b;
+            font-size: 13px;
+            transition: all 0.25s ease;
+        }
+
+        .form-control::placeholder {
+            color: #b5aaa1;
+        }
+
+        .form-control:focus {
+            border-color: #a8754c;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(168, 117, 76, 0.12);
+        }
+
+        .btn-register {
+            width: 100%;
+            height: 50px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #80512f, #56351f);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            box-shadow: 0 8px 18px rgba(86, 53, 31, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #96643d, #684126);
+            color: #fff;
+            box-shadow: 0 12px 25px rgba(86, 53, 31, 0.28);
+        }
+
+        .login-text {
+            margin-top: 22px;
+            color: #8b8179;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .login-link {
+            color: #86542f;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            color: #bd854d;
+            text-decoration: underline;
+        }
+
+        .form-footer {
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 1px solid #eee7e0;
+            color: #a39990;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 28px 16px;
+            }
+
+            .register-wrapper {
+                max-width: 480px;
+                grid-template-columns: 1fr;
+                min-height: auto;
+                border-radius: 20px;
+            }
+
+            .register-image {
+                min-height: 230px;
+                padding: 28px;
+            }
+
+            .register-image h1 {
+                font-size: 33px;
+            }
+
+            .register-image p {
+                margin-bottom: 0;
+                font-size: 13px;
+            }
+
+            .brand-label {
+                margin-bottom: 14px;
+            }
+
+            .decorative-line {
+                margin-bottom: 14px;
+            }
+
+            .register-form-section {
+                padding: 35px 28px;
+            }
+
+            .register-form-section h2 {
+                font-size: 29px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .register-form-section {
+                padding: 28px 20px;
+            }
+
+            .register-image {
+                padding: 23px;
+            }
+
+            .register-image h1 {
+                font-size: 29px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    {% include 'navuser.html' %}
+
+    <main class="page-content">
+        <div class="register-wrapper">
+
+            <!-- Left Welcome Section -->
+            <section class="register-image">
+                <span class="brand-label">Welcome to Heavenly Hotel
+
+                <div class="decorative-line"></div>
+
+                <h1>Your Table.<br><span>Your Taste.</span></h1>
+
+                <p>
+                    Join our café community and enjoy delicious food,
+                    refreshing drinks, and wonderful moments.
+                    Create your account to get started.
+                </p>
+            </section>
+
+            <!-- Registration Form -->
+            <section class="register-form-section">
+
+                <div class="welcome-icon" aria-hidden="true">☕</div>
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+                    Fill in your details below to become part of Heavenly Hotel.
+                </p>
+
+                <form action="{% url 'bookregister_form' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-2">
+                        <label for="name" class="form-label">Full Name</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">👤</span>
+
+                            <input
+                                type="text"
+                                name="name"
+                                id="name"
+                                class="form-control"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="mobile" class="form-label">Mobile Number</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">📱</span>
+
+                            <input
+                                type="tel"
+                                name="mobile"
+                                id="mobile"
+                                class="form-control"
+                                placeholder="Enter your mobile number"
+                                autocomplete="tel"
+                                inputmode="numeric"
+                                pattern="[0-9]{10}"
+                                maxlength="10"
+                                minlength="10"
+                                title="Please enter a valid 10-digit mobile number"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Create Password</label>
+
+                        <div class="input-wrapper">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                class="form-control"
+                                placeholder="Create a strong password"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-register">
+                        Create My Account &rarr;
+                    </button>
+
+                    <p class="login-text">
+                        Already have an account?
+                        <a href="{% url 'booklogin' %}" class="login-link">
+                            Login here
+                        </a>
+                    </p>
+                </form>
+
+                <div class="form-footer">
+                    &copy; {% now "Y" %} Heavenly Hotel. All rights reserved.
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

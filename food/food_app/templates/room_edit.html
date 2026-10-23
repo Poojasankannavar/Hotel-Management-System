@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Room Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="{% url 'userHome' %}">Admin Panel</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+
+                <li class="nav-item"><a class="nav-link" href="{% url 'admin_home' %}">HOME</a></li>
+
+                <!-- Table -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="tableDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">TABLE</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add_table' %}">Add Table</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_table' %}">View Table</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users' %}">User Register list</a></li>
+                        <li><a class="dropdown-item" href="{% url 'food_view' %}">food view</a></li>
+
+
+                    </ul>
+                </li>
+
+                <!-- Room -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="roomDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ROOM</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'addroom' %}">Add Room</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room' %}">View Room</a></li>
+                        <li><a class="dropdown-item" href="{% url 'bookregister_list' %}">Room Register</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room_list' %}">Room Booking List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room_view' %}"> view Room Booking</a></li>
+
+
+                    </ul>
+                </li>
+
+                <!-- Item -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="itemDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">ITEM</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add_item' %}">Add Item</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_item' %}">View Item</a></li>
+                    </ul>
+                </li>
+
+                <!-- Purchase -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="purchaseDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">PURCHASE</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'purchase' %}">Add Purchase</a></li>
+                        <li><a class="dropdown-item" href="{% url 'purchaseList' %}">View Purchase</a></li>
+                    </ul>
+                </li>
+
+                <!-- Company -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="companyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">HOTEL</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'add_company' %}">Add HOTEL</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_company' %}">View HOTEL</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link" href="{% url 'pending_bills' %}">PENDING</a></li>
+
+                <!-- Register -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="registerDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">STAFF</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'register' %}">Add Staff</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register_list' %}">Staff List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'salary' %}">Add Salary</a></li>
+                        <li><a class="dropdown-item" href="{% url 'viewSalary' %}">Salary List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'admins' %}">Admins List</a></li>
+
+                    </ul>
+                </li>
+
+                <!-- Expenses -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="expensesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">EXPENSES</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'addExpenses' %}">Add Expense</a></li>
+                        <li><a class="dropdown-item" href="{% url 'viewExpenses' %}">Expenses List</a></li>
+                    </ul>
+                </li>
+
+                <!-- Reports -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="reportsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">REPORTS</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'sales_report' %}">Sales Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'item_report' %}">Item Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'daily_report' %}">Daily Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profit_report' %}">Profit Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pendingReport' %}">Pending Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'purchaseReport' %}">Purchase Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'itempurchaseReport' %}">Item Purchase Report</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item"><a class="nav-link text-danger fw-bold" href="{% url 'homepage' %}">LOGOUT</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+    <h3 class="text-center mb-4">Edit Room Booking</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="row mb-3">
+            <div class="col"><input type="text" name="first_name" value="{{ booking.first_name }}" class="form-control" required></div>
+            <div class="col"><input type="text" name="last_name" value="{{ booking.last_name }}" class="form-control" required></div>
+        </div>
+        <div class="mb-3"><input type="email" name="email" value="{{ booking.email }}" class="form-control" required></div>
+        <div class="mb-3"><input type="text" name="mobile_number" value="{{ booking.mobile_number }}" class="form-control" required></div>
+        <div class="mb-3"><input type="date" name="check_in" value="{{ booking.check_in }}" class="form-control" required></div>
+        <div class="mb-3"><input type="date" name="check_out" value="{{ booking.check_out }}" class="form-control" required></div>
+        <div class="mb-3">
+            <select name="room_type" class="form-select">
+                <option value="Single" {% if booking.room_type == "Single" %}selected{% endif %}>Single</option>
+                <option value="Double" {% if booking.room_type == "Double" %}selected{% endif %}>Double</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <select name="category" class="form-select">
+                <option value="AC" {% if booking.category == "AC" %}selected{% endif %}>A/C</option>
+                <option value="Non-AC" {% if booking.category == "Non-AC" %}selected{% endif %}>Non A/C</option>
+            </select>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-success">Update Booking</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

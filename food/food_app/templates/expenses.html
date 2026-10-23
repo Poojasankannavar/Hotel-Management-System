@@ -1,0 +1,128 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Template">
+    <meta name="keywords" content="Hotel, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel - Add Expenses</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Taviraj:wght@400;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        /* Custom styling */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            padding-top: 100px;
+            background-color: #f8f9fa;
+        }
+
+        h3 {
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-family: 'Taviraj', serif;
+        }
+
+        .form-control {
+            margin-bottom: 15px;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        .header-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+{% include 'nav.html' %}
+
+<!-- Page Content -->
+<div class="container">
+    <h3 class="text-center">Add Expenses</h3>
+    <form method="post" action="{% url 'saveExpenses' %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-6">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date" required>
+            </div>
+            <div class="col-md-6">
+                <label for="amt">Amount</label>
+                <input type="number" class="form-control" id="amt" name="amt" placeholder="Enter amount" required>
+            </div>
+            <div class="col-md-6">
+                <label for="reason">Description</label>
+                <input type="text" class="form-control" id="reason" name="reason" placeholder="E.g. Salary, Rent, Maintenance" oninput="toggleSalaryField()" required>
+            </div>
+
+            <!-- Extra Field for Salary -->
+            <div class="col-md-6" id="salaryContainer" style="display: none;">
+                <label for="staff_name">Staff Name</label>
+                <input type="text" class="form-control" name="staff_name" placeholder="Enter staff name">
+            </div>
+
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-success w-50 mt-3">Save Expense</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- JS Scripts -->
+<script>
+    // Auto-set current date (adjust if before 2 AM)
+    function setCurrentDate() {
+        const now = new Date();
+        if (now.getHours() < 2) {
+            now.setDate(now.getDate() - 1);
+        }
+        const yyyy = now.getFullYear();
+        const mm = ('0' + (now.getMonth() + 1)).slice(-2);
+        const dd = ('0' + now.getDate()).slice(-2);
+        document.getElementById('date').value = `${yyyy}-${mm}-${dd}`;
+    }
+
+    // Show/hide salary-related input field
+    function toggleSalaryField() {
+        const reason = document.getElementById('reason').value.toLowerCase();
+        const salaryField = document.getElementById('salaryContainer');
+        salaryField.style.display = reason.includes('salary') ? 'block' : 'none';
+    }
+
+    // Run on page load
+    window.onload = setCurrentDate;
+</script>
+
+<!-- Bootstrap & JS -->
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</body>
+</html>

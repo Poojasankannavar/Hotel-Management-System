@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Salary View">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Salary - Hotel Management</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:300,400,600,700,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .header-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .main-menu li:hover .drop-menu {
+            display: block;
+        }
+
+        .form-section {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        .table-container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-success {
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    <br><br><br><br><br>
+
+    <div class="container mt-4">
+        <div class="form-section">
+            <form method="post" action="{% url 'viewSalary' %}">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="from_date" class="form-label">From Date</label>
+                        <input type="date" class="form-control" id="from_date" name="from_date" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="to_date" class="form-label">To Date</label>
+                        <input type="date" class="form-control" id="to_date" name="to_date" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="salaryDetails" class="form-label">Staff Name</label>
+                        <input type="text" class="form-control" id="salaryDetails" name="salaryDetails"
+                            placeholder="Start typing..." list="staff_name" oninput="showStaffDatalist()">
+                        <datalist id="staff_name"></datalist>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-success w-100">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        {% if grand_total %}
+        <h3 class="text-success">Total Amount: ₹{{ grand_total }}</h3>
+        {% endif %}
+
+        {% if expenses %}
+        <div class="table-container">
+            <table class="table table-bordered table-hover table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Expense Head</th>
+                        <th>Amount</th>
+                        <th>Staff Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.Date }}</td>
+                        <td>{{ expense.desc }}</td>
+                        <td>₹{{ expense.Amount }}</td>
+                        <td>{{ expense.staffname }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <p class="mt-4 text-muted">No salary records found for the selected period.</p>
+        {% endif %}
+    </div>
+
+    <!-- JS -->
+    <script>
+        function showStaffDatalist() {
+            const input = document.getElementById('salaryDetails');
+            const datalist = document.getElementById('staff_name');
+
+            if (input.value.length >= 2) {
+                fetch(`/get_staff_name?query=${encodeURIComponent(input.value)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        datalist.innerHTML = '';
+                        if (Array.isArray(data) && data.length > 0) {
+                            data.forEach(name => {
+                                const option = document.createElement('option');
+                                option.value = name;
+                                datalist.appendChild(option);
+                            });
+                        } else {
+                            const option = document.createElement('option');
+                            option.value = 'No results';
+                            datalist.appendChild(option);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching names:', error));
+            } else {
+                datalist.innerHTML = '';
+            }
+        }
+
+        // Set current date in both fields on load
+        function setCurrentDate() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${yyyy}-${mm}-${dd}`;
+
+            document.getElementById('from_date').value = formattedDate;
+            document.getElementById('to_date').value = formattedDate;
+        }
+
+        window.onload = setCurrentDate;
+    </script>
+
+    <!-- Plugins -->
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>

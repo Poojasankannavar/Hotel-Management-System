@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Hotel Template">
+    <meta name="keywords" content="Hotel, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hotel</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Taviraj:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+
+    <!-- Your static styles -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/linearicons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+
+    <style>
+        /* Keep navbar on top of background */
+        .header-section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+{% include 'nav.html' %}
+
+<br/>
+<br/>
+<br/>
+
+<div class="container py-5">
+    <div class="bg-white shadow p-4 rounded">
+        <h3 class="text-center mb-4">Add Item</h3>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {% if msg %}
+                <div class="alert alert-info text-center">{{ msg }}</div>
+            {% endif %}
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label for="t1" class="form-label">Item Code</label>
+                    <input type="text" id="t1" name="t1" class="form-control" placeholder="Enter item code">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="t2" class="form-label">Item Name</label>
+                    <input type="text" id="t2" name="t2" class="form-control" placeholder="Enter item name">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="qty" class="form-label">Quantity</label>
+                    <input type="number" id="qty" name="qty" class="form-control" placeholder="Enter quantity">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="t4" class="form-label">Item Price</label>
+                    <input type="text" id="t4" name="t4" class="form-control" placeholder="Enter price">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="t5" class="form-label">Category</label>
+                    <select id="t5" name="t5" class="form-select">
+                        <option value="">Select category</option>
+                        <option value="food">Food</option>
+                        <option value="alcohol">Alcohol</option>
+                        <option value="soft_drink">Soft Drink</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 align-self-end">
+                    <button type="submit" class="btn btn-success w-100">Add Item</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

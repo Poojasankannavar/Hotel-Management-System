@@ -1,0 +1,1380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Heavenly Hotel - Hotel, Restaurant and Room Management">
+    <meta name="keywords" content="Heavenly Hotel, Hotel Management, Restaurant, Food, Room Booking">
+    <meta name="author" content="Heavenly Hotel">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Heavenly Hotel | Home</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        :root {
+            --coffee: #4b2e20;
+            --dark: #24160f;
+            --gold: #d9a45b;
+            --cream: #fff8ee;
+            --light: #f8f3eb;
+            --text: #34251d;
+            --muted: #7d7168;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 85px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: #fffdf9;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            min-height: 78px;
+            padding: 12px 4%;
+            background: rgba(36, 22, 15, 0.98) !important;
+            border-bottom: 1px solid rgba(217, 164, 91, 0.35);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.13);
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white !important;
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .brand-logo {
+            width: 62px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(217, 164, 91, 0.6);
+        }
+
+        .brand-name span {
+            color: var(--gold);
+        }
+
+        .navbar-nav {
+            align-items: center;
+            gap: 5px;
+        }
+
+        .navbar .nav-link {
+            color: #f9eee3 !important;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 10px 12px !important;
+            border-radius: 6px;
+            transition: 0.25s;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: var(--gold) !important;
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        .navbar-toggler {
+            border-color: var(--gold);
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 0.15rem rgba(217, 164, 91, 0.25);
+        }
+
+        .dropdown-menu {
+            padding: 8px;
+            background: #fffaf3;
+            border: 1px solid #ead9c3;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .dropdown-item {
+            padding: 10px 12px;
+            color: var(--coffee);
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 6px;
+        }
+
+        .dropdown-item:hover {
+            color: var(--dark);
+            background: #f2e3cf;
+        }
+
+        /* Hero carousel */
+        .hero-carousel {
+            position: relative;
+            background: var(--dark);
+        }
+
+        .hero-carousel .carousel-item {
+            height: min(78vh, 690px);
+            min-height: 430px;
+        }
+
+        .hero-carousel .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0.74;
+        }
+
+        .hero-carousel .carousel-item::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(24, 14, 9, 0.88) 0%,
+                rgba(24, 14, 9, 0.53) 50%,
+                rgba(24, 14, 9, 0.10) 100%
+            );
+        }
+
+        .hero-caption {
+            position: absolute;
+            z-index: 2;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            transform: translateY(-50%);
+            max-width: 680px;
+            color: white;
+            text-align: left;
+        }
+
+        .hero-eyebrow {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 9px 15px;
+            color: var(--gold);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(217, 164, 91, 0.6);
+            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.18);
+        }
+
+        .hero-caption h1 {
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(38px, 6vw, 76px);
+            font-weight: 800;
+            line-height: 1.12;
+        }
+
+        .hero-caption h1 span {
+            color: var(--gold);
+        }
+
+        .hero-caption p {
+            max-width: 540px;
+            margin-bottom: 30px;
+            color: #eee0d2;
+            font-size: 16px;
+            line-height: 1.9;
+        }
+
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            color: var(--dark);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            background: var(--gold);
+            border: 1px solid var(--gold);
+            border-radius: 8px;
+            transition: 0.25s;
+        }
+
+        .btn-gold:hover {
+            color: white;
+            background: transparent;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline-light-custom {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 24px;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 8px;
+            transition: 0.25s;
+        }
+
+        .btn-outline-light-custom:hover {
+            color: var(--dark);
+            background: white;
+        }
+
+        .hero-carousel .carousel-control-prev,
+        .hero-carousel .carousel-control-next {
+            z-index: 3;
+            width: 7%;
+        }
+
+        .hero-carousel .carousel-indicators {
+            z-index: 4;
+        }
+
+        .hero-carousel .carousel-indicators [data-bs-target] {
+            width: 28px;
+            height: 4px;
+            border: 0;
+            border-radius: 5px;
+        }
+
+        /* Feature strip */
+        .feature-strip {
+            position: relative;
+            z-index: 5;
+            width: min(1120px, 92%);
+            margin: -38px auto 0;
+            padding: 24px 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background: white;
+            border: 1px solid #f0e4d6;
+            border-radius: 14px;
+            box-shadow: 0 12px 35px rgba(55, 35, 21, 0.09);
+        }
+
+        .feature-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 13px;
+            padding: 10px;
+        }
+
+        .feature-icon {
+            flex-shrink: 0;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #96622d;
+            font-size: 18px;
+            background: #fbf0df;
+            border-radius: 12px;
+        }
+
+        .feature-box h6 {
+            margin: 0 0 4px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .feature-box p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* Shared section styles */
+        .section {
+            padding: 95px 0;
+        }
+
+        .section-light {
+            background: var(--light);
+        }
+
+        .section-heading {
+            max-width: 700px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .section-eyebrow {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #98672f;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(30px, 4vw, 45px);
+            font-weight: 800;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* Hotel cards */
+        .hotel-card {
+            height: 100%;
+            overflow: hidden;
+            background: white;
+            border: 1px solid #eee3d7;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(52, 37, 29, 0.04);
+            transition: 0.3s ease;
+        }
+
+        .hotel-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 17px 35px rgba(52, 37, 29, 0.13);
+        }
+
+        .hotel-image-wrap {
+            position: relative;
+            height: 245px;
+            overflow: hidden;
+            background: #e9ded0;
+        }
+
+        .hotel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .hotel-card:hover .hotel-image {
+            transform: scale(1.06);
+        }
+
+        .hotel-number {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 37px;
+            height: 37px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-size: 12px;
+            font-weight: 800;
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        .hotel-content {
+            padding: 23px;
+        }
+
+        .hotel-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .hotel-content p {
+            min-height: 43px;
+            margin-bottom: 18px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .hotel-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: #8b5c2d;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .hotel-link i {
+            transition: transform 0.25s;
+        }
+
+        .hotel-link:hover {
+            color: var(--dark);
+        }
+
+        .hotel-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* About section */
+        .about-image-container {
+            position: relative;
+            padding: 0 20px 20px 0;
+        }
+
+        .about-image-container::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 70%;
+            height: 70%;
+            border: 3px solid var(--gold);
+            border-radius: 15px;
+            z-index: 0;
+        }
+
+        .about-carousel {
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(36, 22, 15, 0.15);
+        }
+
+        .about-carousel .carousel-item {
+            height: 420px;
+            background: #e5d7c6;
+        }
+
+        .about-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-content {
+            padding: 15px 10px 15px 25px;
+        }
+
+        .about-content h2 {
+            margin-bottom: 20px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(30px, 4vw, 43px);
+            font-weight: 800;
+        }
+
+        .about-content > p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .about-points {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+            margin: 27px 0;
+        }
+
+        .about-point {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #513a29;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .about-point i {
+            color: #a16c30;
+            font-size: 17px;
+        }
+
+        /* CTA section */
+        .cta-section {
+            position: relative;
+            padding: 75px 0;
+            overflow: hidden;
+            color: white;
+            background:
+                linear-gradient(100deg, rgba(36, 22, 15, 0.96), rgba(75, 46, 32, 0.92)),
+                url("{% static 'img/table1.jpg' %}") center/cover no-repeat;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 14px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 800;
+        }
+
+        .cta-section p {
+            margin: 0;
+            color: #e4d6c8;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Contact section */
+        .contact-card {
+            height: 100%;
+            padding: 27px;
+            background: white;
+            border: 1px solid #eee3d7;
+            border-radius: 14px;
+            transition: 0.25s;
+        }
+
+        .contact-card:hover {
+            border-color: #d9b889;
+            box-shadow: 0 10px 25px rgba(52, 37, 29, 0.07);
+        }
+
+        .contact-icon {
+            width: 47px;
+            height: 47px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 17px;
+            color: #98672f;
+            font-size: 18px;
+            background: #fbf0df;
+            border-radius: 12px;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 16px;
+            color: var(--dark);
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .contact-card p {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 13px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-card p i {
+            width: 15px;
+            margin-top: 4px;
+            color: #a16c30;
+        }
+
+        .map-wrapper {
+            overflow: hidden;
+            border: 1px solid #eadfd2;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(52, 37, 29, 0.08);
+        }
+
+        .map-wrapper iframe {
+            display: block;
+            width: 100%;
+            height: 390px;
+            border: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 55px 0 20px;
+            color: #eee1d5;
+            background: var(--dark);
+        }
+
+        .footer-brand {
+            margin-bottom: 15px;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-size: 25px;
+            font-weight: 800;
+        }
+
+        .footer-brand span {
+            color: var(--gold);
+        }
+
+        .footer p {
+            color: #c5b3a3;
+            font-size: 12px;
+            line-height: 1.9;
+        }
+
+        .footer-heading {
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+        }
+
+        .footer-links {
+            display: grid;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #d9c8b8;
+            font-size: 12px;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Responsive design */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                align-items: stretch;
+                padding-top: 12px;
+            }
+
+            .navbar .nav-link {
+                padding: 10px 12px !important;
+            }
+
+            .hero-carousel .carousel-item {
+                height: 570px;
+            }
+
+            .hero-caption {
+                left: 9%;
+                right: 9%;
+            }
+
+            .feature-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-content {
+                padding: 30px 0 0;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .navbar {
+                padding: 10px 4%;
+            }
+
+            .navbar-brand {
+                font-size: 21px;
+            }
+
+            .brand-logo {
+                width: 48px;
+                height: 40px;
+            }
+
+            .hero-carousel .carousel-item {
+                height: 520px;
+                min-height: 0;
+            }
+
+            .hero-carousel .carousel-item img {
+                object-position: center;
+            }
+
+            .hero-caption {
+                left: 8%;
+                right: 8%;
+            }
+
+            .hero-caption h1 {
+                font-size: 40px;
+            }
+
+            .hero-caption p {
+                font-size: 13px;
+            }
+
+            .hero-caption .hero-buttons {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .btn-gold,
+            .btn-outline-light-custom {
+                padding: 12px 15px;
+                font-size: 10px;
+            }
+
+            .feature-strip {
+                width: 92%;
+                margin-top: -25px;
+                padding: 12px 6px;
+                gap: 4px;
+            }
+
+            .feature-box {
+                justify-content: flex-start;
+                gap: 8px;
+                padding: 10px 5px;
+            }
+
+            .feature-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
+            }
+
+            .feature-box h6 {
+                font-size: 11px;
+            }
+
+            .feature-box p {
+                font-size: 9px;
+            }
+
+            .section {
+                padding: 65px 0;
+            }
+
+            .hotel-image-wrap {
+                height: 220px;
+            }
+
+            .about-carousel .carousel-item {
+                height: 300px;
+            }
+
+            .about-points {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section {
+                padding: 55px 0;
+            }
+
+            .map-wrapper iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+    {% include 'navuser.html' %}
+
+<!-- ================= HERO CAROUSEL ================= -->
+<section class="hero-carousel">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0"
+                    class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
+        </div>
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="{% static 'img/hotels3.jpg' %}"
+                     class="d-block w-100" alt="Hotel hospitality">
+                <div class="hero-caption">
+                    <div class="hero-eyebrow">
+                        Welcome to Heavenly Hotel
+                    </div>
+                    <h1>Where Every<br>Moment Feels <span>Special.</span></h1>
+                    <p>
+                        Discover warm hospitality, delicious food, comfortable stays,
+                        and a welcoming experience designed around you.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'hotelslist' %}" class="btn-gold">
+                            EXPLORE OUR HOTELS <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="{% url 'food_view' %}" class="btn-outline-light-custom">
+                            <i class="fas fa-utensils"></i> VIEW FOOD MENU
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'img/food1.jpg' %}"
+                     class="d-block w-100" alt="Delicious food">
+                <div class="hero-caption">
+                    <div class="hero-eyebrow">Freshly Prepared</div>
+                    <h1>Good Food.<br><span>Great Memories.</span></h1>
+                    <p>
+                        Explore a variety of delicious dishes prepared to make
+                        every meal memorable.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'food_view' %}" class="btn-gold">
+                            EXPLORE FOOD MENU <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'img/table1.jpg' %}"
+                     class="d-block w-100" alt="Restaurant table">
+                <div class="hero-caption">
+                    <div class="hero-eyebrow">Easy Dining</div>
+                    <h1>Your Table.<br><span>Your Experience.</span></h1>
+                    <p>
+                        Enjoy convenient table ordering and a smooth dining
+                        experience from start to finish.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'index' %}" class="btn-gold">
+                            ORDER A TABLE <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'img/staff.jpg' %}"
+                     class="d-block w-100" alt="Hotel staff">
+                <div class="hero-caption">
+                    <div class="hero-eyebrow">Service with a Smile</div>
+                    <h1>Hospitality<br>That Makes You <span>Smile.</span></h1>
+                    <p>
+                        Our hospitality-focused approach helps create a comfortable,
+                        welcoming experience for every guest.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#about" class="btn-gold">
+                            DISCOVER OUR STORY <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="{% static 'img/room.jpg' %}"
+                     class="d-block w-100" alt="Comfortable hotel room">
+                <div class="hero-caption">
+                    <div class="hero-eyebrow">Comfortable Stays</div>
+                    <h1>Relax, Rest<br>and <span>Recharge.</span></h1>
+                    <p>
+                        Find your comfortable stay and enjoy a simple,
+                        convenient room-booking experience.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="{% url 'room_view' %}" class="btn-gold">
+                            EXPLORE ROOMS <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev" type="button"
+                data-bs-target="#heroCarousel" data-bs-slide="prev"
+                aria-label="Previous slide">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button"
+                data-bs-target="#heroCarousel" data-bs-slide="next"
+                aria-label="Next slide">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+
+    </div>
+</section>
+
+<!-- ================= FEATURE STRIP ================= -->
+<section class="feature-strip" aria-label="Our services">
+
+    <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-hotel"></i></div>
+        <div>
+            <h6>Quality Stays</h6>
+            <p>Comfortable rooms</p>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-utensils"></i></div>
+        <div>
+            <h6>Delicious Food</h6>
+            <p>Meals for every taste</p>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-chair"></i></div>
+        <div>
+            <h6>Easy Ordering</h6>
+            <p>Convenient table orders</p>
+        </div>
+    </div>
+
+    <div class="feature-box">
+        <div class="feature-icon"><i class="fas fa-headset"></i></div>
+        <div>
+            <h6>Guest Support</h6>
+            <p>Here to help</p>
+        </div>
+    </div>
+
+</section>
+
+<!-- ================= HOTELS LIST ================= -->
+<section class="section" id="hotels">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-eyebrow">Discover Our Properties</div>
+            <h2>Explore Our Hotels</h2>
+            <p>
+                Explore our featured properties and discover the hospitality
+                and services available through Heavenly Hotel.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <article class="hotel-card">
+                    <div class="hotel-image-wrap">
+                        <a href="{% url 'order_room' %}" aria-label="Explore Shiva Shakti Palace">
+                            <img src="{% static 'img/hotels1.jpg' %}"
+                                 class="hotel-image" alt="Shiva Shakti Palace" loading="lazy">
+                        </a>
+                        <div class="hotel-number">01</div>
+                    </div>
+                    <div class="hotel-content">
+                        <h3>Shiva Shakti Palace</h3>
+                        <p>Discover our property and explore the available services.</p>
+                        <a href="{% url 'room_view' %}" class="hotel-link">
+                            EXPLORE HOTEL <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <article class="hotel-card">
+                    <div class="hotel-image-wrap">
+                        <a href="{% url 'order_room' %}" aria-label="Explore Hotel Ashoka">
+                            <img src="{% static 'img/hotels2.jpg' %}"
+                                 class="hotel-image" alt="Hotel Ashoka" loading="lazy">
+                        </a>
+                        <div class="hotel-number">02</div>
+                    </div>
+                    <div class="hotel-content">
+                        <h3>Hotel Ashoka</h3>
+                        <p>Find out more about the property and its guest services.</p>
+                        <a href="{% url 'room_view' %}" class="hotel-link">
+                            EXPLORE HOTEL <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <article class="hotel-card">
+                    <div class="hotel-image-wrap">
+                        <a href="{% url 'order_room' %}" aria-label="Explore Hitaishi Palace">
+                            <img src="{% static 'img/hotels3.jpg' %}"
+                                 class="hotel-image" alt="Hitaishi Palace" loading="lazy">
+                        </a>
+                        <div class="hotel-number">03</div>
+                    </div>
+                    <div class="hotel-content">
+                        <h3>Hitaishi Palace</h3>
+                        <p>Explore the property and discover the services offered.</p>
+                        <a href="{% url 'room_view' %}" class="hotel-link">
+                            EXPLORE HOTEL <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <article class="hotel-card">
+                    <div class="hotel-image-wrap">
+                        <a href="{% url 'order_room' %}" aria-label="Explore Sri Sai Residency">
+                            <img src="{% static 'img/hall.jpg' %}"
+                                 class="hotel-image" alt="Sri Sai Residency" loading="lazy">
+                        </a>
+                        <div class="hotel-number">04</div>
+                    </div>
+                    <div class="hotel-content">
+                        <h3>Sri Sai Residency</h3>
+                        <p>Learn more about the property and available facilities.</p>
+                        <a href="{% url 'room_view' %}" class="hotel-link">
+                            EXPLORE HOTEL <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-5">
+            <a href="{% url 'hotelslist' %}" class="btn-gold">
+                VIEW ALL HOTELS <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= ABOUT SECTION ================= -->
+<section class="section section-light" id="about">
+    <div class="container">
+        <div class="row align-items-center g-5">
+
+            <div class="col-lg-6">
+                <div class="about-image-container">
+
+                    <div id="foodCarousel" class="carousel slide about-carousel"
+                         data-bs-ride="carousel">
+
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active" data-bs-interval="4000">
+                                <img src="{% static 'img/food1.jpg' %}"
+                                     alt="Food served at the restaurant" loading="lazy">
+                            </div>
+
+                            <div class="carousel-item" data-bs-interval="4000">
+                                <img src="{% static 'img/thali.jpg' %}"
+                                     alt="Traditional thali meal" loading="lazy">
+                            </div>
+
+                            <div class="carousel-item" data-bs-interval="4000">
+                                <img src="{% static 'img/food2.jpeg' %}"
+                                     alt="Restaurant food selection" loading="lazy">
+                            </div>
+
+                            <div class="carousel-item" data-bs-interval="4000">
+                                <img src="{% static 'img/dosa.jpg' %}"
+                                     alt="Dosa dish" loading="lazy">
+                            </div>
+
+                            <div class="carousel-item" data-bs-interval="4000">
+                                <img src="{% static 'img/samosa.jpg' %}"
+                                     alt="Freshly prepared samosas" loading="lazy">
+                            </div>
+
+                        </div>
+
+                        <button class="carousel-control-prev" type="button"
+                                data-bs-target="#foodCarousel" data-bs-slide="prev"
+                                aria-label="Previous food image">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button"
+                                data-bs-target="#foodCarousel" data-bs-slide="next"
+                                aria-label="Next food image">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="about-content">
+
+                    <div class="section-eyebrow">About Us</div>
+
+                    <h2>Making Every Guest Experience Better</h2>
+
+                    <p>
+                        Heavenly Hotel's Hotel Management System is a web application
+                        designed to organize hotel and restaurant operations in
+                        one convenient platform.
+                    </p>
+
+                    <p>
+                        The system brings together room booking, food ordering,
+                        table management, staff management, stock management,
+                        and billing. It helps simplify everyday tasks and makes
+                        it easier to manage hospitality services.
+                    </p>
+
+                    <div class="about-points">
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Room Booking
+                        </div>
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Food Ordering
+                        </div>
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Table Management
+                        </div>
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Billing Support
+                        </div>
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Stock Management
+                        </div>
+
+                        <div class="about-point">
+                            <i class="fas fa-check-circle"></i>
+                            Staff Management
+                        </div>
+
+                    </div>
+
+                    <a href="{% url 'hotelslist' %}" class="btn-gold">
+                        EXPLORE OUR SERVICES <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= CALL TO ACTION ================= -->
+<section class="cta-section">
+    <div class="container">
+        <div class="row align-items-center g-4">
+
+            <div class="col-lg-8">
+                <div class="section-eyebrow">Your Experience Starts Here</div>
+                <h2>Ready to Explore Our Food and Rooms?</h2>
+                <p>
+                    Browse the menu, explore our hotel services, or discover
+                    convenient room-booking options.
+                </p>
+            </div>
+
+            <div class="col-lg-4 text-lg-end">
+                <a href="{% url 'food_view' %}" class="btn-gold me-2 mb-2">
+                    <i class="fas fa-utensils"></i> FOOD MENU
+                </a>
+
+                <a href="{% url 'room_view' %}" class="btn-outline-light-custom mb-2">
+                    <i class="fas fa-bed"></i> ROOMS
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section class="section" id="contact">
+    <div class="container">
+
+        <div class="section-heading">
+            <div class="section-eyebrow">Get in Touch</div>
+            <h2>Contact Our Properties</h2>
+            <p>
+                Have a question about a property, food ordering, or room booking?
+                Use the contact details below.
+            </p>
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-hotel"></i>
+                    </div>
+                    <h3>Shiva Shakti Palace</h3>
+                    <p><i class="fas fa-location-dot"></i> 123 PB Road, Haveri, India</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> shiva123@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Working hours: 24/7</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>Hotel Ashoka</h3>
+                    <p><i class="fas fa-location-dot"></i> 123 PB Road, Haveri, India</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> ashok123@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Working hours: 24/7</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <h3>Hitaishi Palace</h3>
+                    <p><i class="fas fa-location-dot"></i> 123 PB Road, Haveri, India</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> hitaishi123@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Working hours: 24/7</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-house"></i>
+                    </div>
+                    <h3>Sri Sai Residency</h3>
+                    <p><i class="fas fa-location-dot"></i> 123 PB Road, Haveri, India</p>
+                    <p><i class="fas fa-phone"></i> +123 456 7890</p>
+                    <p><i class="fas fa-envelope"></i> sai23@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Working hours: 24/7</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Map -->
+        <div class="mt-5">
+            <div class="section-heading mb-4">
+                <div class="section-eyebrow">Location</div>
+                <h2>Find Us on the Map</h2>
+                <p>
+                    Update the map embed with your actual hotel or café location
+                    before publishing the website.
+                </p>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe
+                    src="https://www.google.com/maps?q=Haveri,Karnataka,India&output=embed"
+                    title="Map showing Haveri, Karnataka"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-5">
+                <div class="footer-brand">
+                    Heavenly Hotel
+                </div>
+
+                <p>
+                    More Than Coffee, It's an Experience. Explore food,
+                    hospitality, room booking, and restaurant services through
+                    our hotel management platform.
+                </p>
+            </div>
+
+            <div class="col-6 col-lg-3">
+                <h5 class="footer-heading">QUICK LINKS</h5>
+                <div class="footer-links">
+                    <a href="{% url 'homepage' %}">Home</a>
+                    <a href="{% url 'hotelslist' %}">Hotels List</a>
+                    <a href="#about">About Us</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
+
+            <div class="col-6 col-lg-4">
+                <h5 class="footer-heading">OUR SERVICES</h5>
+                <div class="footer-links">
+                    <a href="{% url 'food_view' %}">Food Menu</a>
+                    <a href="{% url 'index' %}">Table Ordering</a>
+                    <a href="{% url 'room_view' %}">Room Booking</a>
+                    <a href="{% url 'adminlogin' %}">Administrator Login</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>
+                &copy; {% now "Y" %} Heavenly Hotel. All Rights Reserved.
+                Designed with <i class="fas fa-heart" style="color: #d9a45b;"></i>
+                for a better hospitality experience.
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+</body>
+</html>

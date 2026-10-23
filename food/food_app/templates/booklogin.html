@@ -1,0 +1,446 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="User Login Form">
+    <meta name="keywords" content="HTML, CSS, Bootstrap, Django">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'DM Sans', sans-serif;
+            background-image:
+                linear-gradient(120deg, rgba(24, 16, 12, 0.82), rgba(57, 35, 22, 0.45)),
+                url("{% static 'img/userlogin.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .page-content {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 560px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.97);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            animation: fadeIn 0.8s ease;
+        }
+
+        .login-image {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 45px;
+            background:
+                linear-gradient(to top, rgba(27, 17, 11, 0.95), rgba(27, 17, 11, 0.05)),
+                url("{% static 'img/userlogin.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+
+        .image-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .brand-label {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            color: #f3c78a;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .login-image h1 {
+            margin-bottom: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .login-image h1 span {
+            color: #e7b66f;
+        }
+
+        .login-image p {
+            max-width: 350px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .decorative-line {
+            width: 65px;
+            height: 4px;
+            margin-bottom: 25px;
+            border-radius: 10px;
+            background: #e7b66f;
+        }
+
+        .login-form-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 55px 50px;
+            color: #30231c;
+        }
+
+        .welcome-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            border-radius: 18px;
+            background: #f7eee3;
+            color: #82542f;
+            font-size: 29px;
+        }
+
+        .login-form-section h2 {
+            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #38261b;
+        }
+
+        .subtitle {
+            margin-bottom: 32px;
+            color: #8b8179;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .form-label {
+            margin-bottom: 9px;
+            color: #49372b;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 23px;
+        }
+
+        .input-icon {
+            position: absolute;
+            top: 50%;
+            left: 16px;
+            z-index: 2;
+            transform: translateY(-50%);
+            color: #9b806b;
+            font-size: 17px;
+        }
+
+        .form-control {
+            height: 53px;
+            padding: 12px 15px 12px 46px;
+            border: 1px solid #e8dfd7;
+            border-radius: 12px;
+            background: #fcfaf8;
+            color: #38261b;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .form-control::placeholder {
+            color: #b5aaa1;
+        }
+
+        .form-control:focus {
+            border-color: #a8754c;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(168, 117, 76, 0.12);
+        }
+
+        .btn-custom {
+            width: 100%;
+            height: 53px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #80512f, #56351f);
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            box-shadow: 0 8px 18px rgba(86, 53, 31, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #96643d, #684126);
+            box-shadow: 0 12px 25px rgba(86, 53, 31, 0.3);
+            color: #fff;
+        }
+
+        .btn-custom:active {
+            transform: translateY(0);
+        }
+
+        .register-text {
+            margin-top: 25px;
+            color: #8b8179;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .register-link {
+            color: #86542f;
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .register-link:hover {
+            color: #bd854d;
+            text-decoration: underline;
+        }
+
+        .form-footer {
+            margin-top: 35px;
+            padding-top: 20px;
+            border-top: 1px solid #eee7e0;
+            color: #a39990;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 30px 16px;
+            }
+
+            .login-wrapper {
+                max-width: 480px;
+                grid-template-columns: 1fr;
+                min-height: auto;
+                border-radius: 20px;
+            }
+
+            .login-image {
+                min-height: 230px;
+                padding: 30px;
+            }
+
+            .login-image h1 {
+                font-size: 34px;
+            }
+
+            .login-image p {
+                margin-bottom: 0;
+                font-size: 13px;
+            }
+
+            .brand-label {
+                margin-bottom: 12px;
+            }
+
+            .decorative-line {
+                margin-bottom: 15px;
+            }
+
+            .login-form-section {
+                padding: 35px 28px;
+            }
+
+            .welcome-icon {
+                width: 54px;
+                height: 54px;
+                margin-bottom: 18px;
+                font-size: 25px;
+            }
+
+            .login-form-section h2 {
+                font-size: 29px;
+            }
+
+            .subtitle {
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .login-form-section {
+                padding: 30px 20px;
+            }
+
+            .login-image {
+                min-height: 210px;
+                padding: 24px;
+            }
+
+            .login-image h1 {
+                font-size: 29px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    {% include 'navuser.html' %}
+
+    <!-- Login Page -->
+    <main class="page-content">
+        <div class="login-wrapper">
+
+            <!-- Left Image Section -->
+            <section class="login-image">
+                <div class="image-content">
+                    <span class="brand-label">Welcome</span>
+
+                    <div class="decorative-line"></div>
+
+                    <h1>Good Food.<br><span>Great Moments.</span></h1>
+
+                    <p>
+                        Your favorite flavors and memorable dining experiences
+                        are just a login away. Come in, relax, and enjoy.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Right Login Form -->
+            <section class="login-form-section">
+
+                <div class="welcome-icon">
+                    <span aria-hidden="true">☕</span>
+                </div>
+
+                <h2>Welcome Back!</h2>
+
+                <p class="subtitle">
+                    Please enter your credentials to access your account.
+                </p>
+
+                <form action="{% url 'book_login' %}" method="post">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+
+                        <div class="input-group-custom">
+                            <span class="input-icon" aria-hidden="true">👤</span>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="name"
+                                class="form-control"
+                                placeholder="Enter your username"
+                                autocomplete="username"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="password" class="form-label">Password</label>
+
+                        <div class="input-group-custom">
+                            <span class="input-icon" aria-hidden="true">🔒</span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-control"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-custom">
+                        Login to Your Account &rarr;
+                    </button>
+
+                    <p class="register-text">
+                        Don't have an account?
+                        <a href="{% url 'bookregister' %}" class="register-link">
+                            Create an account
+                        </a>
+                    </p>
+                </form>
+
+                <div class="form-footer">
+                    &copy; {% now "Y" %} Heavenly Hotel. All rights reserved.
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

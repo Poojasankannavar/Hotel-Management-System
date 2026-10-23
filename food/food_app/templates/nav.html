@@ -1,0 +1,486 @@
+{% load static %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --nav-bg: #171a2b;
+            --nav-hover: #292d45;
+            --nav-accent: #7565f1;
+            --nav-text: #d2d5e5;
+            --nav-muted: #969bb5;
+        }
+
+        body {
+            margin: 0;
+            padding-top: 88px;
+            background-color: #f4f6fc;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        /* Main Navbar */
+        .admin-navbar {
+            min-height: 76px;
+            background: var(--nav-bg);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            padding: 0 24px;
+            z-index: 1050;
+        }
+
+        .admin-navbar .container-fluid {
+            gap: 22px;
+        }
+
+        /* Brand */
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #fff !important;
+            font-size: 17px;
+            font-weight: 750;
+            letter-spacing: .3px;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 43px;
+            height: 43px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #9487ff, #5948dc);
+            box-shadow: 0 5px 16px rgba(91,75,219,.3);
+            font-size: 22px;
+        }
+
+        .brand-text small {
+            display: block;
+            color: var(--nav-muted);
+            font-size: 9px;
+            letter-spacing: 2px;
+            margin-top: 3px;
+            font-weight: 500;
+        }
+
+        /* Navigation links */
+        .admin-navbar .navbar-nav {
+            gap: 3px;
+            align-items: center;
+        }
+
+        .admin-navbar .nav-link {
+            color: var(--nav-text);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 12px 11px !important;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            transition: all .2s ease;
+            white-space: nowrap;
+        }
+
+        .admin-navbar .nav-link > i {
+            font-size: 15px;
+        }
+
+        .admin-navbar .nav-link:hover,
+        .admin-navbar .nav-link:focus,
+        .admin-navbar .nav-link.show {
+            color: #fff;
+            background: var(--nav-hover);
+        }
+
+        .admin-navbar .nav-link.active {
+            color: #fff;
+            background: var(--nav-accent);
+            box-shadow: 0 4px 12px rgba(117,101,241,.25);
+        }
+
+        .admin-navbar .dropdown-toggle::after {
+            margin-left: 2px;
+            vertical-align: middle;
+        }
+
+        /* Dropdown menus */
+        .admin-navbar .dropdown-menu {
+            background: #fff;
+            border: 1px solid #e9ebf4;
+            border-radius: 12px;
+            padding: 8px;
+            min-width: 210px;
+            margin-top: 12px !important;
+            box-shadow: 0 14px 35px rgba(15,20,45,.16);
+            animation: dropdownFade .18s ease;
+        }
+
+        .admin-navbar .dropdown-menu::before {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: 23px;
+            width: 11px;
+            height: 11px;
+            background: #fff;
+            border-left: 1px solid #e9ebf4;
+            border-top: 1px solid #e9ebf4;
+            transform: rotate(45deg);
+        }
+
+        .admin-navbar .dropdown-item {
+            position: relative;
+            z-index: 1;
+            padding: 10px 12px;
+            color: #454a60;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 7px;
+            transition: all .18s ease;
+        }
+
+        .admin-navbar .dropdown-item:hover,
+        .admin-navbar .dropdown-item:focus {
+            background: #f0eeff;
+            color: #5948dc;
+            padding-left: 16px;
+        }
+
+        /* Logout */
+        .admin-navbar .logout-link {
+            color: #ff9aa6 !important;
+            border: 1px solid rgba(255,125,145,.2);
+            background: rgba(230,77,96,.08);
+            padding: 10px 13px !important;
+            margin-left: 5px;
+        }
+
+        .admin-navbar .logout-link:hover {
+            color: #fff !important;
+            background: #d94156;
+            border-color: #d94156;
+        }
+
+        /* Mobile menu toggle */
+        .admin-navbar .navbar-toggler {
+            border: 1px solid rgba(255,255,255,.2);
+            padding: 8px 10px;
+            border-radius: 9px;
+            box-shadow: none;
+        }
+
+        .admin-navbar .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(117,101,241,.25);
+        }
+
+        .admin-navbar .navbar-toggler-icon {
+            width: 22px;
+            height: 22px;
+        }
+
+        @keyframes dropdownFade {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Laptop and tablet */
+        @media (max-width: 1500px) {
+            .admin-navbar {
+                padding: 0 15px;
+            }
+
+            .admin-navbar .container-fluid {
+                gap: 12px;
+            }
+
+            .navbar-brand {
+                font-size: 15px;
+                margin-right: 3px;
+            }
+
+            .brand-icon {
+                width: 39px;
+                height: 39px;
+            }
+
+            .admin-navbar .nav-link {
+                font-size: 11px;
+                padding: 11px 8px !important;
+                gap: 5px;
+            }
+
+            .admin-navbar .nav-link > i {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            body {
+                padding-top: 76px;
+            }
+
+            .admin-navbar {
+                min-height: 68px;
+            }
+
+            .admin-navbar .navbar-collapse {
+                max-height: calc(100vh - 75px);
+                overflow-y: auto;
+                padding: 12px 0 18px;
+            }
+
+            .admin-navbar .navbar-nav {
+                align-items: stretch;
+                gap: 4px;
+            }
+
+            .admin-navbar .nav-link {
+                padding: 12px 14px !important;
+                font-size: 13px;
+            }
+
+            .admin-navbar .dropdown-menu {
+                margin: 3px 0 8px !important;
+                background: #202338;
+                border-color: rgba(255,255,255,.08);
+                box-shadow: none;
+            }
+
+            .admin-navbar .dropdown-menu::before {
+                display: none;
+            }
+
+            .admin-navbar .dropdown-item {
+                color: #d2d5e5;
+                padding: 11px 15px;
+            }
+
+            .admin-navbar .dropdown-item:hover,
+            .admin-navbar .dropdown-item:focus {
+                background: var(--nav-hover);
+                color: #fff;
+            }
+
+            .admin-navbar .logout-link {
+                margin: 8px 0 0;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .admin-navbar {
+                padding: 0 12px;
+            }
+
+            .navbar-brand {
+                font-size: 14px;
+            }
+
+            .brand-icon {
+                width: 37px;
+                height: 37px;
+                font-size: 19px;
+            }
+
+            .brand-text small {
+                font-size: 8px;
+            }
+        }
+    </style>
+<nav class="navbar navbar-expand-xl navbar-dark admin-navbar fixed-top shadow">
+
+    <div class="container-fluid">
+
+        <!-- Brand -->
+        <a class="navbar-brand" href="{% url 'admin_home' %}">
+            <span class="brand-icon">
+                <i class="bi bi-buildings-fill"></i>
+            </span>
+            <span class="brand-text">
+                Admin Panel
+                <small>HOTEL MANAGEMENT</small>
+            </span>
+        </a>
+
+        <!-- Mobile toggle -->
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+            <ul class="navbar-nav me-auto">
+
+                <!-- Home -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'admin_home' %}">
+                        <i class="bi bi-grid-1x2-fill"></i>
+                        HOME
+                    </a>
+                </li>
+
+                <!-- Table -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="tableDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-grid-3x3-gap"></i>
+                        TABLE
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="tableDropdown">
+                        <li><a class="dropdown-item" href="{% url 'add_table' %}">Add Table</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_table' %}">View Table</a></li>
+                        <li><a class="dropdown-item" href="{% url 'users' %}">User Register List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'food_view' %}">Food View</a></li>
+                    </ul>
+                </li>
+
+                <!-- Rooms -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="roomDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-door-open"></i>
+                        ROOM
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="roomDropdown">
+                        <li><a class="dropdown-item" href="{% url 'addroom' %}">Add Room</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room' %}">View Room</a></li>
+                        <li><a class="dropdown-item" href="{% url 'bookregister_list' %}">Room Register</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room_list' %}">Room Booking List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'room_view' %}">View Room Booking</a></li>
+                    </ul>
+                </li>
+
+                <!-- Items -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="itemDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-box-seam"></i>
+                        ITEM
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="itemDropdown">
+                        <li><a class="dropdown-item" href="{% url 'add_item' %}">Add Item</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_item' %}">View Item</a></li>
+                    </ul>
+                </li>
+
+                <!-- Purchase -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="purchaseDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-cart3"></i>
+                        PURCHASE
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="purchaseDropdown">
+                        <li><a class="dropdown-item" href="{% url 'purchase' %}">Add Purchase</a></li>
+                        <li><a class="dropdown-item" href="{% url 'purchaseList' %}">View Purchase</a></li>
+                    </ul>
+                </li>
+
+                <!-- Hotel -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="companyDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-buildings"></i>
+                        HOTEL
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="companyDropdown">
+                        <li><a class="dropdown-item" href="{% url 'add_company' %}">Add Hotel</a></li>
+                        <li><a class="dropdown-item" href="{% url 'view_company' %}">View Hotel</a></li>
+                    </ul>
+                </li>
+
+                <!-- Pending -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pending_bills' %}">
+                        <i class="bi bi-receipt"></i>
+                        PENDING
+                    </a>
+                </li>
+
+                <!-- Staff -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="registerDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people"></i>
+                        STAFF
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="registerDropdown">
+                        <li><a class="dropdown-item" href="{% url 'register' %}">Add Staff</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register_list' %}">Staff List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'salary' %}">Add Salary</a></li>
+                        <li><a class="dropdown-item" href="{% url 'viewSalary' %}">Salary List</a></li>
+                        <li><a class="dropdown-item" href="{% url 'admins' %}">Admins List</a></li>
+                    </ul>
+                </li>
+
+                <!-- Expenses -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="expensesDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-wallet2"></i>
+                        EXPENSES
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="expensesDropdown">
+                        <li><a class="dropdown-item" href="{% url 'addExpenses' %}">Add Expense</a></li>
+                        <li><a class="dropdown-item" href="{% url 'viewExpenses' %}">Expenses List</a></li>
+                    </ul>
+                </li>
+
+                <!-- Reports -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#"
+                       id="reportsDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bar-chart-line"></i>
+                        REPORTS
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="reportsDropdown">
+                        <li><a class="dropdown-item" href="{% url 'sales_report' %}">Sales Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'item_report' %}">Item Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'daily_report' %}">Daily Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profit_report' %}">Profit Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'pendingReport' %}">Pending Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'purchaseReport' %}">Purchase Report</a></li>
+                        <li><a class="dropdown-item" href="{% url 'itempurchaseReport' %}">Item Purchase Report</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+            <!-- Logout -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link logout-link" href="{% url 'homepage' %}">
+                        <i class="bi bi-box-arrow-right"></i>
+                        LOGOUT
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

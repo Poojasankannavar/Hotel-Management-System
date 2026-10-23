@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.utils.dateparse import parse_date
 from django.views.decorators.http import require_http_methods
+from urllib.parse import urlencode
 from food_app.models import  UserReg, AddTable, AddItem, AddCompany, ItemOrder, Orders, Pracel, Printorders, \
     Expenses, Salary, Purchase, Billpending, Deletedata,pendingBill
 
@@ -703,7 +704,8 @@ def save_order(request):
             # For food items, skip stock check and show a log message (only for debugging)
             print(f"Skipping stock check for food item: {item_name}")
 
-    return JsonResponse({'success': True, 'redirect_url': reverse('admin_home')})
+    redirect_url = f"{reverse('print_bill')}?{urlencode({'table_name': table_name, 'bill_no': bill_no})}"
+    return JsonResponse({'success': True, 'redirect_url': redirect_url})
 
 
 @require_http_methods(["POST"])
@@ -815,7 +817,8 @@ def save_order_user(request):
             print(f"Skipping stock check for food item: {item_name}")
 
 
-    return JsonResponse({'success': True, 'redirect_url': reverse('userHome')})
+    redirect_url = f"{reverse('print_bill_user')}?{urlencode({'table_name': table_name, 'bill_no': bill_no})}"
+    return JsonResponse({'success': True, 'redirect_url': redirect_url})
 
 
 @require_http_methods(["GET"])
@@ -881,6 +884,7 @@ def print_table(request):
 
 def print_bill(request):
     selected_table_name = request.GET.get('table_name')
+    bill_no = request.GET.get('bill_no')
 
     if request.method == 'GET' and selected_table_name:
         company = AddCompany.objects.all()
@@ -888,6 +892,8 @@ def print_bill(request):
     if selected_table_name:
         # Fetch related ItemOrder objects
         item_orders = Printorders.objects.filter(table_name=selected_table_name)
+        if bill_no:
+            item_orders = item_orders.filter(bill_no=bill_no)
         table_data = {
             'table_name': selected_table_name,
             'items': []
@@ -1320,6 +1326,7 @@ def print_table_user(request):
 
 def print_bill_user(request):
     selected_table_name = request.GET.get('table_name')
+    bill_no = request.GET.get('bill_no')
 
     if request.method == 'GET' and selected_table_name:
         company = AddCompany.objects.all()
@@ -1327,6 +1334,8 @@ def print_bill_user(request):
     if selected_table_name:
         # Fetch related ItemOrder objects
         item_orders = Printorders.objects.filter(table_name=selected_table_name)
+        if bill_no:
+            item_orders = item_orders.filter(bill_no=bill_no)
         table_data = {
             'table_name': selected_table_name,
             'items': []

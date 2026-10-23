@@ -1,3 +1,5 @@
+import json
+
 from django.test import TestCase
 from django.urls import reverse
 
@@ -55,6 +57,35 @@ class PublicFlowTests(TestCase):
         self.assertContains(admin_response, 'No dining tables are configured yet.')
         self.assertContains(admin_response, reverse('add_table'))
         self.assertContains(user_response, 'No dining tables are available yet.')
+
+    def test_admin_and_user_order_submissions_return_print_redirects(self):
+        payload = {
+            'billDetails': {'table_name': 'T1', 'bill_no': 'B1001', 'bill_date': '2026-10-23'},
+            'billItems': [{
+                'item_code': '101', 'item_cat': 'food', 'item_name': 'Masala Dosa',
+                'price': '90', 'qty': '1', 'tax_amt': '90', 'total': '90',
+            }],
+        }
+
+        admin_response = self.client.post(
+            reverse('save_order'), data=json.dumps(payload), content_type='application/json'
+        )
+        user_payload = json.loads(json.dumps(payload))
+        user_payload['billDetails']['bill_no'] = 'B1002'
+        user_response = self.client.post(
+            reverse('save_order_user'), data=json.dumps(user_payload), content_type='application/json'
+        )
+
+        self.assertEqual(admin_response.status_code, 200)
+        self.assertEqual(
+            admin_response.json()['redirect_url'],
+            '/print_bill/?table_name=T1&bill_no=B1001',
+        )
+        self.assertEqual(user_response.status_code, 200)
+        self.assertEqual(
+            user_response.json()['redirect_url'],
+            '/print_bill_user/?table_name=T1&bill_no=B1002',
+        )
 
     def test_open_table_deletion_endpoint(self):
         ItemOrder.objects.create(

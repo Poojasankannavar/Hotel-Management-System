@@ -247,21 +247,26 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}'
+                    'X-CSRFToken': document.querySelector('#bill_form [name=csrfmiddlewaretoken]').value
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => response.json())
+            .then(async response => {
+                const result = await response.json().catch(() => ({}));
+                if (!response.ok) {
+                    throw new Error(result.error || `Request failed (${response.status})`);
+                }
+                return result;
+            })
             .then(data => {
                 if (data.success) {
                     alert('Bill details saved successfully!');
-                window.location.href = `/print_bill?table_name=${billDetails.table_name}&bill_no=${billDetails.bill_no}`;
+                    window.location.assign(data.redirect_url);
                 } else {
-                    console.error('Error saving bill details:', data.error);
-                    alert('Error saving bill details: ' + data.error);
+                    throw new Error(data.error || 'The order could not be saved.');
                 }
             })
-            .catch(error => console.error('Error saving bill details:', error));
+            .catch(error => alert('Error saving bill details: ' + error.message));
         } else {
             console.error('No bill details to save');
             alert('No bill details to save');
